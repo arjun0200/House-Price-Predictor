@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>House Price Prediction</title>
+  </head>
+  <body class = 'bg-dark'>
+    <div class = 'container'>
+      <div class = 'row'>
+        <div class = 'card' style = 'width:100%; height: 100%; margin-top: 50px'>
+          <div class = "card-header" style = "text-align: center">
+            <h1>House Price Predictor</h1>
+        </div>
+        <div class="card-body">
+          <form method = "post" accept-charset="utf-8">
+            <div class = "row">
+
+              <div class = "col-md-6 form-group" style="text-align: center">
+                <label><b>House Age</b></label>
+                <input type = 'text' class = "form-control" id ="House Age" name="House Age" placeholder="Enter House Age">
+              </div>
+
+              <div class = "col-md-6 form-group" style="text-align: center">
+                <label><b>Distance From Metro</b></label>
+                <input type = 'text' class = "form-control" id ="Distance from nearest Metro station (km)" name="Distance From Metro" placeholder="Enter Distance From Metro">
+              </div>
+
+              <div class = "col-md-6 form-group" style="text-align: center">
+                <label><b>No. of Stores</b></label>
+                <input type = 'text' class = "form-control" id ="Number of convenience stores" name="No. of Stores" placeholder="Enter No. of Stores">
+              </div>
+
+              <div class = "col-md-6 form-group" style="text-align: center">
+                <label><b>Number of bedrooms</b></label>
+                <input type = 'text' class = "form-control" id ="Number of bedrooms" name="Number of bedrooms" placeholder="Enter No. of Bedrooms">
+              </div>
+
+              <div class = "col-md-6 form-group" style="text-align: center">
+                <label><b>House size (sqft)</b></label>
+                <input type = 'text' class = "form-control" id ="House size (sqft)" name="House size (sqft)" placeholder="Enter House size in (sqft)">
+              </div>
+
+              <div class = "col-md-6 form-group" style="text-align: center">
+                <label><b>House price of unit area</b></label>
+                <input type = 'text' class = "form-control" id ="House price of unit area" name="House price of unit area" placeholder="Enter Unit price of area">
+              </div>
+
+              <div class = "col-md-12 form-group">
+                <button class = "btn btn-primary form-control" onclick="send_data()">Predict Price </button>
+              </div>
+            </div>
+          </form>
+          <br>
+          <div class = "col-md-12" style = "text-align: center">
+            <h3><span id = "prediction"></span></h3>
+
+      </div>
+    </div>
+
+    <script>
+        function form_handler(event){
+            event.preventDefault();  // Don't Submit form normally
+        }
+
+        function send_data()
+        {
+           document.querySelector('form').addEventListener("submit",form_handler);
+
+           var fd=new FormData(document.querySelector('form'));
+
+           var xhr = new XMLHttpRequest();
+
+           xhr.open('POST', '/predict',true);
+           document.getElementById("prediction").innerHTML = "Wait Predicting Price!..";
+           xhr.onreadystatechange = function(){
+              if(xhr.readyState == XMLHttpRequest.DONE){
+                  document.getElementById('prediction').innerHTML = "Prediction: Rs."+ xhr.responseText;
+              }
+           };
+
+           xhr.onload = function(){};
+           xhr.send(fd);
+        }
+    </script>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+   </body>
+</html>
