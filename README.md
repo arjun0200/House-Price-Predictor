@@ -16,7 +16,7 @@ No. of stores, No. of bedrooms in the house, House size in square feet, House pr
 
 ## Installation
 
-Here I use  very basic Linear Machine Learning Algorithm which are LinearRegression and Ridge.
+Here I use  very basic regression Machine Learning Algorithm which are LinearRegression and Ridge.
 I used bootstrap and flask module to deployment in pycharm.
 
 
